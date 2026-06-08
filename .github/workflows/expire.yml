@@ -1,0 +1,54 @@
+name: Tự khóa thiệp khi hết hạn
+
+# Chạy mỗi ngày + cho phép bấm chạy tay (Actions → Run workflow).
+# Đọc ngày trong docs/expiry.txt; nếu đã quá hạn thì thay nội dung thiệp
+# bằng trang hết hạn (docs/expired.html) và đẩy file thật ra ngoài thư mục
+# được phục vụ -> Vercel redeploy -> khách không xem được nội dung nữa.
+
+on:
+  schedule:
+    - cron: '0 1 * * *'   # 01:00 UTC ~ 08:00 giờ VN mỗi ngày
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  expire:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Kiểm tra hạn & khóa nếu cần
+        run: |
+          set -e
+          if [ ! -f docs/expiry.txt ]; then
+            echo "Không có docs/expiry.txt — bỏ qua."; exit 0
+          fi
+          if [ -f index.real.html.bak ]; then
+            echo "Thiệp đã bị khóa từ trước — bỏ qua."; exit 0
+          fi
+
+          EXP="$(tr -d '[:space:]' < docs/expiry.txt)"
+          NOW_TS=$(date -u +%s)
+          EXP_TS=$(date -u -d "$EXP" +%s 2>/dev/null || echo 0)
+
+          if [ "$EXP_TS" = "0" ]; then
+            echo "Ngày hết hạn không hợp lệ: '$EXP' — bỏ qua."; exit 0
+          fi
+
+          echo "Bây giờ (UTC): $(date -u)  |  Hết hạn: $EXP"
+          if [ "$NOW_TS" -lt "$EXP_TS" ]; then
+            echo "Chưa tới hạn — không làm gì."; exit 0
+          fi
+
+          echo "ĐÃ QUÁ HẠN -> khóa thiệp."
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          # Đẩy file thật ra ngoài docs/ (Vercel không phục vụ) rồi thay bằng trang hết hạn
+          git mv docs/index.html index.real.html.bak
+          cp docs/expired.html docs/index.html
+          git add -A
+          git commit -m "Auto-lock: thiệp hết hạn ($EXP)"
+          git push
+          echo "Đã khóa xong."
