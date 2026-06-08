@@ -1,0 +1,30 @@
+{
+  "_ghi_chu": "Copy file này thành config.json, điền giá trị bên phải (sau ->) rồi chạy: python3 customize.py config.json --dry-run để xem trước.",
+
+  "countdown": "2026-12-20 17:00:00",
+  "expiry": "2026-12-24T23:59:00",
+  "lien_he_text": "0900 000 000",
+  "lien_he_link": "https://zalo.me/0900000000",
+
+  "replacements": [
+    ["Minh Quân", "TÊN_CHÚ_RỂ"],
+    ["Hà My", "TÊN_CÔ_DÂU"],
+
+    ["16.05 - 17.05", "NGÀY.DƯƠNG - NGÀY.DƯƠNG"],
+    ["<br>2026<br>", "<br>NĂM<br>"],
+    [">05 - 2026<", ">NGÀY - NĂM<"],
+    [">05.2026<", ">NGÀY.NĂM<"],
+    ["THỨ BẢY", "THỨ_MẤY"],
+    ["30 tháng 03 năm Bính Ngọ", "NGÀY tháng THÁNG năm CAN_CHI"],
+
+    ["xóm 7 Xuân Châu (Thọ Lập mới) Thọ Xuân Thanh  Hóa", "ĐỊA_CHỈ_NHÀ_TRAI"],
+    ["Thanh Khê, Thanh Lâm, Ninh Bình", "ĐỊA_CHỈ_NHÀ_GÁI"],
+
+    ["Phạm Văn Long", "BỐ_CHÚ_RỂ"],
+    ["Nguyễn Thị Dung", "MẸ_CHÚ_RỂ"],
+    ["Phạm Hữu Tiến", "BỐ_CÔ_DÂU"],
+    ["Lê Thị Thoa", "MẸ_CÔ_DÂU"],
+
+    ["Thiệp Mời Cưới Mẫu RedLove - GÓI VIP", "Thiệp Cưới TÊN_CHÚ_RỂ & TÊN_CÔ_DÂU"]
+  ]
+}

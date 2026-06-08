@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Thiệp đã hết thời gian hiển thị</title>
+<meta name="robots" content="noindex">
+<style>
+  :root{ --do:#650d1d; --do2:#801E2A; --vang:#e7c178; }
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  html,body{ height:100%; }
+  body{
+    min-height:100%;
+    display:flex; align-items:center; justify-content:center;
+    background:radial-gradient(circle at 50% 35%, var(--do2), var(--do) 70%);
+    color:#fff; font-family:"Times New Roman", serif; text-align:center;
+    padding:24px;
+  }
+  .card{ max-width:440px; }
+  .seal{
+    width:120px; height:120px; margin:0 auto 26px;
+    border:3px solid var(--vang); border-radius:50%;
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 0 0 6px rgba(231,193,120,.18) inset;
+  }
+  .seal span{ font-size:54px; color:var(--vang); line-height:1; font-family:serif; }
+  h1{ font-size:28px; color:var(--vang); margin-bottom:14px; letter-spacing:1px; }
+  p{ font-size:17px; line-height:1.7; color:#f3e8d6; }
+  .divider{ width:60px; height:2px; background:var(--vang); margin:20px auto; opacity:.6; }
+  .contact{
+    display:inline-block; margin-top:22px; padding:11px 22px;
+    border:1px solid var(--vang); border-radius:30px;
+    color:var(--vang); text-decoration:none; font-size:15px;
+  }
+  .contact:hover{ background:var(--vang); color:var(--do); }
+  .small{ margin-top:18px; font-size:13px; color:#d8b48c; opacity:.8; }
+</style>
+</head>
+<body>
+  <div class="card">
+    <div class="seal"><span>囍</span></div>
+    <h1>Thiệp đã hết thời gian hiển thị</h1>
+    <div class="divider"></div>
+    <p>Cảm ơn bạn đã ghé thăm thiệp cưới.<br>
+       Thời gian hiển thị của thiệp này đã kết thúc.</p>
+    <!-- ⟵ SỬA thông tin liên hệ của bạn ở dưới -->
+    <a class="contact" href="https://zalo.me/0000000000">Liên hệ: 0000 000 000</a>
+    <p class="small">Trân trọng ❤</p>
+  </div>
+</body>
+</html>

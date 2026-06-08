@@ -5,3 +5,6 @@ clone_redlove/
 .DS_Store
 *.log
 .vscode/
+
+# Config từng khách (không commit vào MẪU)
+config.json
