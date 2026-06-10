@@ -65,6 +65,14 @@ def main():
         if tn and " " in tn:
             print("  ⚠️ rsvp_tenant nên KHÔNG dấu cách (vd 'tuanlinh').")
 
+    # Domain của thiệp (cho thẻ OG: link preview tên + ảnh khi share)
+    site = cfg.get("site_url", "")
+    if site:
+        site = site.replace("https://", "").replace("http://", "").rstrip("/")
+        n = html.count("__SITE_URL__")
+        html = html.replace("__SITE_URL__", site)
+        print(f"\n=== LINK PREVIEW (OG, {n} chỗ) ===\n  __SITE_URL__ -> {site}")
+
     # Ngày hết hạn
     exp = cfg.get("expiry")
     if exp:

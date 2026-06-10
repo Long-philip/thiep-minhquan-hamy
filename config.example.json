@@ -6,6 +6,9 @@
   "lien_he_text": "0900 000 000",
   "lien_he_link": "https://zalo.me/0900000000",
 
+  "_site_url_ghi_chu": "Domain nơi thiệp chạy (cho link preview OG). GitHub Pages: long-philip.github.io/<repo>. Vercel: <project>.vercel.app",
+  "site_url": "tenchure-codau.vercel.app",
+
   "_rsvp_ghi_chu": "rsvp_endpoint: URL .../exec của Apps Script — DÙNG CHUNG cho MỌI khách. rsvp_tenant: mã khách KHÁC NHAU mỗi người (không dấu, viết liền) — mỗi mã = 1 tab riêng trong Google Sheet.",
   "rsvp_endpoint": "https://script.google.com/macros/s/AKfycbwTL-f68227rtZ-3Rw6jc2uUUlUnIpCG7BwWHDOhAk6mxeWyhbYTYV8AlZZMNQUv9rorA/exec",
   "rsvp_tenant": "tuanlinh",
