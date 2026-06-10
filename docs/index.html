@@ -737,4 +737,43 @@ icon.src = ICON_LIST[Math.floor(Math.random() * ICON_LIST.length)];
                                     console.log('%cDừng lại!', styleTitle);
                                     console.log('%cĐây là một tính năng của trình duyệt dành cho các nhà phát triển. Nếu ai đó bảo bạn sao chép-dán nội dung nào đó vào đây để bật một tính năng của LadiPage hoặc "hack" tài khoản của người khác, thì đó là hành vi lừa đảo và sẽ khiến họ có thể truy cập vào tài khoản của bạn.', styleMsg);
                                 })();
-                            </script></body></html><!--Publish time: Fri, 29 May 2026 07:14:15 GMT--><!--LadiPage build time: Fri, 29 May 2026 03:58:15 GMT-->
+                            </script><!-- RSVP -> Google Sheet (begin) -->
+<script>
+(function(){
+  var ENDPOINT = "https://script.google.com/macros/s/AKfycbwTL-f68227rtZ-3Rw6jc2uUUlUnIpCG7BwWHDOhAk6mxeWyhbYTYV8AlZZMNQUv9rorA/exec"; // RSVP_ENDPOINT
+  var TENANT = "minhquan-hamy"; // RSVP_TENANT
+  if(!ENDPOINT || ENDPOINT.lastIndexOf("http",0)!==0){ return; } // chua cau hinh -> bo qua
+  function ready(fn){ if(document.readyState!=="loading"){fn();} else {document.addEventListener("DOMContentLoaded",fn);} }
+  ready(function(){
+    var form = document.querySelector('#FORM4 form');
+    var btn  = document.getElementById('RSVP_SUBMIT_BUTTON');
+    if(!form || !btn){ return; }
+    var sending = false;
+    function val(name){ var el=form.querySelector('[name="'+name+'"]'); return el ? (el.value||"").trim() : ""; }
+    function radio(){ var el=form.querySelector('[name="form_item"]:checked'); return el ? el.value : ""; }
+    var tip=document.createElement('div');
+    tip.style.cssText="position:fixed;left:50%;bottom:28px;transform:translateX(-50%);z-index:2147483647;max-width:90%;padding:12px 18px;border-radius:10px;font:600 15px/1.4 sans-serif;color:#fff;box-shadow:0 6px 24px rgba(0,0,0,.25);display:none;text-align:center";
+    document.body.appendChild(tip);
+    var tipT;
+    function toast(msg,ok){ tip.textContent=msg; tip.style.background=ok?"#2e7d32":"#b3261e"; tip.style.display="block"; clearTimeout(tipT); tipT=setTimeout(function(){tip.style.display="none";}, ok?4000:3500); }
+    function resetForm(){ try{form.reset();}catch(e){} var s=form.querySelectorAll('.ladi-form-checkbox-item span[data-checked]'); for(var i=0;i<s.length;i++){ s[i].setAttribute('data-checked','false'); } }
+    function send(ev){
+      if(ev){ ev.preventDefault(); ev.stopImmediatePropagation(); }
+      if(sending){ return; }
+      var name=val('name'), attending=radio();
+      if(!name){ toast('Vui long nhap Ho va Ten', false); return; }
+      if(!attending){ toast('Vui long chon xac nhan tham du', false); return; }
+      sending=true;
+      var payload={ tenant:TENANT, name:name, attending:attending, party:val('form_item14'), guests:val('form_item15'), message:val('message'), page:location.href };
+      fetch(ENDPOINT,{ method:'POST', mode:'no-cors', headers:{'Content-Type':'text/plain;charset=utf-8'}, body:JSON.stringify(payload) })
+        .then(function(){ toast('Cam on ban da xac nhan tham du! \u{1F496}', true); resetForm(); })
+        .catch(function(){ toast('Gui chua duoc, ban thu lai giup nhe.', false); })
+        .then(function(){ sending=false; });
+    }
+    btn.addEventListener('click', send, true);
+    form.addEventListener('submit', send, true);
+  });
+})();
+</script>
+<!-- RSVP -> Google Sheet (end) -->
+</body></html><!--Publish time: Fri, 29 May 2026 07:14:15 GMT--><!--LadiPage build time: Fri, 29 May 2026 03:58:15 GMT-->

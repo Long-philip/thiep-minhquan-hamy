@@ -15,6 +15,30 @@ Repo này là **MẪU**. Mỗi khách = 1 repo riêng tạo từ mẫu này + 1 
 **Việc cần làm 1 lần trên GitHub/Vercel:**
 1. GitHub → repo này → Settings → tick **Template repository**.
 2. Tạo tài khoản **Vercel** (vercel.com), đăng nhập bằng GitHub.
+3. **RSVP → Google Sheet** (1 lần, dùng chung mọi khách): xem mục
+   "📋 RSVP → Google Sheet" bên dưới + file `google-apps-script/Code.gs`.
+
+---
+
+## 📋 RSVP → Google Sheet (mỗi khách = 1 tab)
+
+Form "Xác nhận tham dự" trong thiệp sẽ gửi kết quả về **1 Google Sheet tổng**
+của bạn; **mỗi khách hàng = 1 tab riêng** (tab tự tạo khi có RSVP đầu tiên).
+
+**Cài 1 lần:**
+1. Tạo 1 Google Sheet mới (sổ tổng chứa RSVP của mọi khách).
+2. Trong Sheet: **Extensions → Apps Script**, dán toàn bộ `google-apps-script/Code.gs`, Save.
+3. **Deploy → New deployment → Web app**: Execute as = *Me*, Who has access = *Anyone* →
+   Deploy → cấp quyền → copy **Web app URL** dạng `https://script.google.com/macros/s/…/exec`.
+4. URL này **dùng chung cho mọi khách** → điền vào `rsvp_endpoint` trong mỗi `config.json`.
+
+**Mỗi khách:** đặt `rsvp_tenant` KHÁC NHAU (không dấu, viết liền — vd `tuanlinh`).
+`customize.py` sẽ tự điền cả 2 giá trị vào thiệp. Khách RSVP → 1 hàng mới trong tab
+mang tên `rsvp_tenant` của khách đó.
+
+> Sửa code Apps Script sau này: **Deploy → Manage deployments → (bút chì) → New version → Deploy**.
+> URL `/exec` giữ nguyên nên KHÔNG phải sửa lại config của khách.
+> Nếu `rsvp_endpoint` để trống / chưa cấu hình → form chỉ không gửi đi, thiệp vẫn chạy bình thường.
 
 ---
 

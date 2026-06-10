@@ -49,6 +49,22 @@ def main():
         print(f"\n=== ĐỒNG HỒ ĐẾM NGƯỢC ===\n  [{n}] bT {CURRENT_BT} -> {ms}  ({cfg['countdown']} giờ VN)")
         html = html.replace('"bT":' + CURRENT_BT, '"bT":' + str(ms))
 
+    # RSVP -> Google Sheet (điền endpoint dùng chung + tenant riêng mỗi khách)
+    ep = cfg.get("rsvp_endpoint", "")
+    tn = cfg.get("rsvp_tenant", "")
+    if ep or tn:
+        print("\n=== RSVP → GOOGLE SHEET ===")
+        html, n1 = re.subn(r'(var ENDPOINT = ")[^"]*("; // RSVP_ENDPOINT)',
+                           lambda m: m.group(1) + ep + m.group(2), html)
+        html, n2 = re.subn(r'(var TENANT = ")[^"]*("; // RSVP_TENANT)',
+                           lambda m: m.group(1) + tn + m.group(2), html)
+        warn1 = "  ⚠️ KHÔNG TÌM THẤY chỗ chèn endpoint" if n1 == 0 else ""
+        warn2 = "  ⚠️ KHÔNG TÌM THẤY chỗ chèn tenant"   if n2 == 0 else ""
+        print(f"  [{n1}] endpoint -> {ep or '(trống)'}{warn1}")
+        print(f"  [{n2}] tenant   -> {tn or '(trống)'}{warn2}")
+        if tn and " " in tn:
+            print("  ⚠️ rsvp_tenant nên KHÔNG dấu cách (vd 'tuanlinh').")
+
     # Ngày hết hạn
     exp = cfg.get("expiry")
     if exp:
